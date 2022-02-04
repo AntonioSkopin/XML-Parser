@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<signature>
+	<row style="">
+		<column style="">
+			<link datasource="user" href="" fieldname="link">
+				<image src="" style="" datasource="user" fieldname="image"></image>
+			</link>
+		</column>
+		<column style="">
+			<text datasource="user" fieldname="name">Name: </text>
+			<newline style="" />
+			<text datasource="user" fieldname="role">Role: </text>
+			<newline style="" />
+			<text datasource="user" fieldname="phone">Phone: </text>
+			<newline style="" />
+			<link datasource="user" href="" fieldname="link">
+				<text datasource="user" fieldname="website">Website: </text>
+			</link>
+			<newline style="" />
+			<text datasource="user" fieldname="email">Email: </text>
+			<newline style="" />
+			<text datasource="user" fieldname="address">Address: </text>
+		</column>
+	</row>
+	<row style="">
+		<column>
+			<button datasource="user" fieldname="btn-1"></button>
+			<button datasource="user" fieldname="btn-2"></button>
+		</column>
+	</row>
+</signature>

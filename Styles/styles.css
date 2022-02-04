@@ -1,0 +1,21 @@
+﻿* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    overflow: hidden;
+}
+
+span {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+img {
+    border-radius: 50%;
+    width: 15rem;
+    margin-right: 5rem;
+}
