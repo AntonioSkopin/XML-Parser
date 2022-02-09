@@ -14,15 +14,12 @@ namespace XmlParser.Signatures
 
         protected override BaseParserObject CreateObject(string name)
         {
-            switch (name.ToLower())
+            return name.ToLower() switch
             {
-                case "text":
-                    return new SignatureText();
-                case "image":
-                    return new SignatureImage();
-                default:
-                    return null;
-            }
+                "text" => new SignatureText(),
+                "image" => new SignatureImage(),
+                _ => null,
+            };
         }
 
         public override void Parse(XmlNode node)
@@ -35,7 +32,8 @@ namespace XmlParser.Signatures
 
         public override void Generate(ISignatureGenerator generator)
         {
-            generator.StartLink(Value);
+            var style = generator.Styles?.GetStyle(Selector)?.ToString(Selector);
+            generator.StartLink(Value, style);
             base.Generate(generator);
             generator.EndLink();
         }
@@ -43,7 +41,7 @@ namespace XmlParser.Signatures
         public override void Parse(ISignatureDataProvider provider)
         {
             base.Parse(provider);
-            this.Value = provider.GetLinkValue(DataSource, Selector);
+            Value = provider.GetLinkValue(DataSource, Selector);
         }
     }
 }

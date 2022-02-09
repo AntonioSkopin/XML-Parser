@@ -23,7 +23,7 @@ namespace XmlParser.Generators
 
         public void StartElement(string tag, string styles)
         {
-            _htmlWriter.AddAttribute("style", styles);
+            SetAttribute("style", styles);
             _htmlWriter.RenderBeginTag(tag);
         }
 
@@ -32,9 +32,10 @@ namespace XmlParser.Generators
             _htmlWriter.RenderEndTag();
         }
 
-        public void StartLink(string href)
+        public void StartLink(string href, string styles)
         {
             SetAttribute("href", href);
+            SetAttribute("styles", styles);
             _htmlWriter.RenderBeginTag("a");
         }
 
