@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<signature>
+	<row style="">
+		<column selector="w-50" style=""></column>
+		<column selector="w-50" style="">
+			<table selector="h-20" style="">
+				<row style="">
+					<column selector="" style=""></column>
+				</row>
+			</table>
+			<table selector="h-60" style="">
+				<row style="">
+					<column selector="" style=""></column>
+				</row>
+			</table>
+			<table selector="h-20" style="">
+				<row style="">
+					<column selector="" style=""></column>
+				</row>
+			</table>
+		</column>
+	</row>
+</signature>

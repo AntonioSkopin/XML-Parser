@@ -19,6 +19,8 @@ namespace XmlParser.Generators
 
         public string AsText => _stringWriter.ToString();
 
+        public ISignatureStyles Styles { get; set; }
+
         public void StartElement(string tag, string styles)
         {
             _htmlWriter.AddAttribute("style", styles);
@@ -68,6 +70,7 @@ namespace XmlParser.Generators
             _htmlWriter.RenderEndTag();
             _htmlWriter.RenderEndTag();
             _htmlWriter.RenderBeginTag(HtmlTextWriterTag.Body);
+            SetAttribute("style", "height: 50%; width: 100%");
             _htmlWriter.RenderBeginTag(HtmlTextWriterTag.Table);
         }
 

@@ -11,6 +11,7 @@ namespace XmlParser.Signatures
         public string FieldName { get; set; }
         public string Value { get; set; }
         public string Styles { get; set; }
+        public string Selector { get; set; }
 
         public override void Parse(XmlNode node)
         {
@@ -18,6 +19,7 @@ namespace XmlParser.Signatures
             FieldName = GetAttribute(node, "fieldname");
             Value = GetAttribute(node, "src");
             Styles = GetAttribute(node, "style");
+            Selector = GetAttribute(node, "selector");
         }
 
         public override void Generate(ISignatureGenerator generator)
@@ -29,7 +31,7 @@ namespace XmlParser.Signatures
         public override void Parse(ISignatureDataProvider provider)
         {
             this.Value = provider.GetImageValue(DataSource, "src");
-            this.Styles = provider.GetStylesValue("image");
+            this.Styles = provider.GetStylesValue(Selector);
         }
     }
 }

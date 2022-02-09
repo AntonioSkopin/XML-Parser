@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml;
+﻿using System.Xml;
 using XmlParser.DataProviders;
 using XmlParser.Generators;
 using XmlParser.Signatures;
 
 namespace XmlParser.Parsers
 {
-    public class SignatureParser : BaseParserCollection
+    public class SignatureParser : BaseParserCollection, ISignatureStyles
     {
         private static Dictionary<string, Type> _generators = new Dictionary<string, Type>(StringComparer.OrdinalIgnoreCase);
 
@@ -31,13 +29,14 @@ namespace XmlParser.Parsers
             _generators[name] = generator;
         }
 
-        static public ISignatureGenerator? CreateGenerator(string name)
+        static public ISignatureGenerator? CreateGenerator(string name, ISignatureStyles styles)
         {
             Type type = _generators[name];
             if (type == null) return null;
 
-            var result = Activator.CreateInstance(type);
-            return result as ISignatureGenerator;
+            var result = Activator.CreateInstance(type) as ISignatureGenerator;
+            if (result != null) result.Styles = styles;
+            return result;
         }
 
         protected override BaseParserCollection? CreateObject(string name)
@@ -46,6 +45,8 @@ namespace XmlParser.Parsers
             {
                 case "row":
                     return new SignatureRow();
+                case "styles":
+                    return new SignatureStyles();
                 default:
                     return null;
             }
@@ -66,7 +67,7 @@ namespace XmlParser.Parsers
 
         public string Generate(string name)
         {
-            var generator = CreateGenerator(name);
+            var generator = CreateGenerator(name, this);
             if (generator == null)
             {
                 throw new KeyNotFoundException(name);
@@ -75,6 +76,14 @@ namespace XmlParser.Parsers
             Generate(generator);
             generator.Finish();
             return generator.AsText;
+        }
+
+        public SignatureStyle GetStyle(string key)
+        {
+            var styles = _items.Where(i => i is SignatureStyles).FirstOrDefault() as SignatureStyles;
+            if (styles == null)
+                return null;
+            return styles.GetStyle(key);
         }
     }
 }

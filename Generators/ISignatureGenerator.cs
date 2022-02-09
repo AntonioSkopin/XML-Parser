@@ -1,4 +1,6 @@
-﻿namespace XmlParser.Generators
+﻿using XmlParser.Signatures;
+
+namespace XmlParser.Generators
 {
     public interface ISignatureGenerator
     {
@@ -14,5 +16,11 @@
         void StartImage(string src, string styles);
 
         string AsText { get; }
+        ISignatureStyles Styles { get; set; }
+    }
+
+    public interface ISignatureStyles
+    {
+        SignatureStyle GetStyle(string key);
     }
 }

@@ -5,6 +5,6 @@
         object GetValue(string name, string fieldName);
         string GetLinkValue(string name, string attribute);
         string GetImageValue(string name, string attribute);
-        string GetStylesValue(string element);
+        string GetStylesValue(string selector);
     }
 }

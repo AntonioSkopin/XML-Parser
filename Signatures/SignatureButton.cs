@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
+﻿using System.Xml;
 using XmlParser.DataProviders;
 using XmlParser.Generators;
 using XmlParser.Parsers;
@@ -16,6 +11,7 @@ namespace XmlParser.Signatures
         public string FieldName { get; set; }
         public string Value { get; set; }
         public string Styles { get; set; }
+        public string Selector { get; set; }
 
         public override void Generate(ISignatureGenerator generator)
         {
@@ -28,12 +24,13 @@ namespace XmlParser.Signatures
         {
             DataSource = GetAttribute(node, "datasource");
             FieldName = GetAttribute(node, "fieldname");
+            Selector = GetAttribute(node, "selector");
         }
 
         public override void Parse(ISignatureDataProvider provider)
         {
             this.Value = provider.GetValue(DataSource, FieldName).ToString();
-            this.Styles = provider.GetStylesValue("button");
+            this.Styles = provider.GetStylesValue(Selector);
         }
     }
 }

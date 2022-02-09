@@ -41,9 +41,9 @@ namespace XmlParser.DataProviders
             }
         }
 
-        public string GetStylesValue(string element)
+        public string GetStylesValue(string selector)
         {
-            return GetStyles(element);
+            return GetStyles(selector) ;
         }
 
         // Fake user
@@ -89,26 +89,50 @@ namespace XmlParser.DataProviders
             {
                 case "src":
                     //return "data:image/png;base64," + _imgService.ConvertImgToBase64(imgPathDir);
-                    return "../Assets/person.png";
+                    return "../Assets/person.jpg";
                 default:
                     return null;
             }
         }
 
-        protected string GetStyles(string element)
+        protected string GetStyles(string selector)
         {
-            switch (element.ToLower())
+            switch (selector.ToLower())
             {
-                case "image":
-                    return "border-radius: 50%; width: 15rem;";
-                case "column":
-                    return "padding: 0 2.5rem;";
-                case "row":
-                    return "display: block; padding: 1.5rem 5rem";
-                case "button":
-                    return "padding: 1rem 2rem; border: none; background-color: black; color: white; border-radius: 2rem;";
-                case "newline":
+                case "rounded-image":
+                    return "border-radius: 50%; height: max-content;";
+                case "image-w100%":
+                    return "width: 100%";
+                case "hidden-newline":
                     return "height: 0.25rem; visibility: hidden;";
+                case "w-20":
+                    return "background-color: orange; width: 20%; position: relative;";
+                case "w-30":
+                    return "background-color: orange; width: 30%; position: relative;";
+                case "w-40":
+                    return "background-color: gray; width: 40%; position: relative";
+                case "w-50":
+                    return "background-color: blue; width: 50%; position: relative";
+                case "w-60":
+                    return "background-color: green; width: 60%; position: relative";
+                case "w-80":
+                    return "background-color: green; width: 80%; position: relative";
+                case "h-10":
+                    return "background-color: pink; height: 10%; width: 100%; position: relative";
+                case "h-20":
+                    return "background-color: pink; height: 20%; width: 100%; position: relative";
+                case "h-30":
+                    return "background-color: black; height: 30%; width: 100%; position: relative";
+                case "h-40":
+                    return "background-color: black; height: 40%; width: 100%; position: relative";
+                case "h-50":
+                    return "background-color: red; height: 50%; border-top: 1px solid white; width: 100%; position: relative";
+                case "h-60":
+                    return "background-color: purple; height: 60%; width: 100%; position: relative";
+                case "h-70":
+                    return "background-color: yellow; height: 70%; width: 100%; position: relative";
+                case "h-80":
+                    return "background-color: gold; height: 80%; position: relative;";
                 default:
                     return null;
             }

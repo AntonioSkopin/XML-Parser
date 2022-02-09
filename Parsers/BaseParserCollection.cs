@@ -6,7 +6,7 @@ namespace XmlParser.Parsers
 {
     public abstract class BaseParserCollection : BaseParserObject
     {
-        private List<BaseParserObject> _items = new List<BaseParserObject>();
+        protected List<BaseParserObject> _items = new List<BaseParserObject>();
 
         public int Count => _items.Count;
 

@@ -1,6 +1,5 @@
 ﻿using XmlParser.DataProviders;
 using XmlParser.Generators;
-using XmlParser.Helpers;
 using XmlParser.Parsers;
 
 namespace XmlParser
@@ -10,7 +9,7 @@ namespace XmlParser
         static void Main(string[] args)
         {
             var outputDirPath = @"C:\Users\antonio.skopin\source\repos\XmlParser\XmlParser\OutputData";
-            var file = Path.Combine(@"C:\Users\antonio.skopin\source\repos\XmlParser\XmlParser\InputData\", "input.xml");
+            var file = Path.Combine(@"C:\Users\antonio.skopin\source\repos\XmlParser\XmlParser\InputData\layouts", "layout_6.xml");
             var xml = File.ReadAllText(file);
 
             var parser = new SignatureParser(new DataProvider());
@@ -20,9 +19,6 @@ namespace XmlParser
             // Generate html file
             var html = parser.Generate("html");
             FileGenerator.GenerateHtmlFile(outputDirPath, html);
-
-            // ImageService img = new ImageService();
-            // Console.WriteLine(img.ConvertImgToBase64(@"C:\Users\antonio.skopin\source\repos\XmlParser\XmlParser\Assets\person.png")));
         }
     }
 }

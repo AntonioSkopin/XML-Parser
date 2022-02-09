@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<signature>
+	<row style="">
+		<column selector="w-35" style="">
+			<table selector="h-30" style="">
+				<row style="">
+					<column style=""></column>
+				</row>
+			</table>
+			<table selector="h-70" style="">
+				<row style="">
+					<column style=""></column>
+				</row>
+			</table>
+		</column>
+		<column selector="w-30" style=""></column>
+		<column selector="w-35" style="">
+			<table selector="h-50" style="">
+				<row style="">
+					<column style=""></column>
+				</row>
+			</table>
+			<table selector="h-50" style="">
+				<row style="">
+					<column style=""></column>
+				</row>
+			</table>
+		</column>
+	</row>
+</signature>

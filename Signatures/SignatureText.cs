@@ -11,7 +11,6 @@ namespace XmlParser.Signatures
         public string FieldName { get; set; }
         public string Value { get; set; }
 
-
         public override void Parse(XmlNode node)
         {
             DataSource = GetAttribute(node, "datasource");

@@ -1,5 +1,4 @@
 ﻿using System.Xml;
-using XmlParser.DataProviders;
 using XmlParser.Generators;
 using XmlParser.Parsers;
 
@@ -7,14 +6,22 @@ namespace XmlParser.Signatures
 {
     internal class SignatureRow : BaseParserCollection
     {
-        public string Styles { get; set; }
+        public string Selector { get; set; }
 
-        protected override BaseParserCollection CreateObject(string name)
+        protected override BaseParserObject CreateObject(string name)
         {
             switch (name.ToLower())
             {
                 case "column":
                     return new SignatureColumn();
+                case "text":
+                    return new SignatureText();
+                case "row":
+                    return new SignatureRow();
+                case "table":
+                    return new SignatureTable();
+                case "newline":
+                    return new SignatureNewline();
                 default:
                     return null;
             }
@@ -23,20 +30,15 @@ namespace XmlParser.Signatures
         public override void Parse(XmlNode node)
         {
             base.Parse(node);
-            Styles = GetAttribute(node, "style");
+            Selector = GetAttribute(node, "selector");
         }
 
         public override void Generate(ISignatureGenerator generator)
         {
-            generator.StartElement("tr", Styles);
+            var style = generator.Styles?.GetStyle(Selector)?.ToString(Selector);
+            generator.StartElement("tr", style);
             base.Generate(generator);
             generator.EndElement();
-        }
-
-        public override void Parse(ISignatureDataProvider provider)
-        {
-            base.Parse(provider);
-            Styles = provider.GetStylesValue("row");
         }
     }
 }

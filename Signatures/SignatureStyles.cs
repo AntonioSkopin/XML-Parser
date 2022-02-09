@@ -5,21 +5,14 @@ using XmlParser.Parsers;
 
 namespace XmlParser.Signatures
 {
-    public class SignatureLink : BaseParserCollection
+    public class SignatureStyles : BaseParserCollection
     {
-        public string DataSource { get; set; }
-        public string FieldName { get; set; }
-        public string Value { get; set; }
-        public string Selector { get; set; }
-
         protected override BaseParserObject CreateObject(string name)
         {
             switch (name.ToLower())
             {
-                case "text":
-                    return new SignatureText();
-                case "image":
-                    return new SignatureImage();
+                case "style":
+                    return new SignatureStyle();
                 default:
                     return null;
             }
@@ -28,22 +21,21 @@ namespace XmlParser.Signatures
         public override void Parse(XmlNode node)
         {
             base.Parse(node);
-            DataSource = GetAttribute(node, "datasource");
-            Value = GetAttribute(node, "href");
-            Selector = GetAttribute(node, "selector");
         }
 
         public override void Generate(ISignatureGenerator generator)
         {
-            generator.StartLink(Value);
             base.Generate(generator);
-            generator.EndLink();
         }
 
         public override void Parse(ISignatureDataProvider provider)
         {
             base.Parse(provider);
-            this.Value = provider.GetLinkValue(DataSource, Selector);
+        }
+
+        public SignatureStyle GetStyle(string key)
+        {
+            return _items.Where(s => string.Compare((s as SignatureStyle).Name, key, true) == 0).FirstOrDefault() as SignatureStyle;
         }
     }
 }

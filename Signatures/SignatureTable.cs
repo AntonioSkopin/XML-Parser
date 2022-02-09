@@ -1,10 +1,11 @@
 ﻿using System.Xml;
+using XmlParser.DataProviders;
 using XmlParser.Generators;
 using XmlParser.Parsers;
 
 namespace XmlParser.Signatures
 {
-    public class SignatureColumn : BaseParserCollection
+    public class SignatureTable : BaseParserCollection
     {
         public string Styles { get; set; }
         public string Selector { get; set; }
@@ -13,22 +14,10 @@ namespace XmlParser.Signatures
         {
             switch (name.ToLower())
             {
-                case "row":
-                    return new SignatureRow();
-                case "column":
-                    return new SignatureColumn();
-                case "text":
-                    return new SignatureText();
-                case "link":
-                    return new SignatureLink();
-                case "image":
-                    return new SignatureImage();
-                case "button":
-                    return new SignatureButton();
-                case "newline":
-                    return new SignatureNewline();
                 case "table":
                     return new SignatureTable();
+                case "row":
+                    return new SignatureRow();
                 default:
                     return null;
             }
@@ -43,12 +32,12 @@ namespace XmlParser.Signatures
 
         public override void Generate(ISignatureGenerator generator)
         {
-            generator.StartElement("td", Styles);
+            generator.StartElement("table", Styles);
             base.Generate(generator);
             generator.EndElement();
         }
 
-        public override void Parse(DataProviders.ISignatureDataProvider provider)
+        public override void Parse(ISignatureDataProvider provider)
         {
             base.Parse(provider);
             Styles = provider.GetStylesValue(Selector);
