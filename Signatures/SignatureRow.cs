@@ -10,21 +10,15 @@ namespace XmlParser.Signatures
 
         protected override BaseParserObject CreateObject(string name)
         {
-            switch (name.ToLower())
+            return name.ToLower() switch
             {
-                case "column":
-                    return new SignatureColumn();
-                case "text":
-                    return new SignatureText();
-                case "row":
-                    return new SignatureRow();
-                case "table":
-                    return new SignatureTable();
-                case "newline":
-                    return new SignatureNewline();
-                default:
-                    return null;
-            }
+                "column" => new SignatureColumn(),
+                "text" => new SignatureText(),
+                "row" => new SignatureRow(),
+                "table" => new SignatureTable(),
+                "newline" => new SignatureNewline(),
+                _ => null,
+            };
         }
 
         public override void Parse(XmlNode node)

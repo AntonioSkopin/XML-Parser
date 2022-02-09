@@ -11,7 +11,7 @@ namespace XmlParser.Generators
         void EndElement();
 
         void InsertText(string text);
-        void StartLink(string href);
+        void StartLink(string href, string styles);
         void EndLink();
         void StartImage(string src, string styles);
 
